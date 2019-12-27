@@ -52,13 +52,15 @@ class Game {
                 var buttonElement = document.createElement('button');
                 buttonElement.classList.add('cell');
                 buttonElement.id = i + '' + j;
+                buttonElement.innerHTML = '&nbsp;&nbsp;'; //adding a non breaking space because of this a stupid bug that adds a padding whenever an element is clicked
+
                 buttonElement.addEventListener('click', this.display);
                 row.appendChild(buttonElement)
             }
         }
     };
 
-
+    // check rows for winning situation
     checkRows = () => {
         for (let row = 0; row < 3; row++) {
             var xCount = 0;
@@ -80,6 +82,7 @@ class Game {
         return false;
     };
 
+    // check columns for winning situation
 
     checkColumns = () => {
         for (let row = 0; row < 3; row++) {
@@ -102,12 +105,13 @@ class Game {
         return false;
     };
 
-    // check all diagonals
+    // check all diagonals fo winning
     checkDiagonals = () => {
         if (this.checkMajorDiagonal()) return true;
         return !!this.checkMinorDiagonal();
     };
 
+    // check major diagonal only
     checkMajorDiagonal = () => {
         var xCount = 0; var oCount = 0;
         for (var index = 0; index < 3; index++) {
@@ -121,6 +125,7 @@ class Game {
         return xCount === 3 || oCount === 3;
 
     };
+    // check minor diagonal only
     checkMinorDiagonal = () => {
         var xCount = 0; var oCount = 0;
         var columnIndex = 2;
@@ -136,28 +141,32 @@ class Game {
         return xCount === 3 || oCount === 3;
 
     };
-
+    // check all possible wins solutions
     checkWins = () => {
         return this.checkRows() || this.checkColumns() || this.checkDiagonals()
     };
 
+    // display which player's turn is it
     displayPlayerRound = () => {
         this.currentPlayer = this.p1Next ? this.p1 : this.p2;
         this.turn.innerHTML = 'Yo Its ' + this.currentPlayer + "'s turn!"
     };
 
+    // displays either X or O and checks if the current player has one or not.
+
     display = (e) => {
-        console.log(this.played)
+        //stops button clicks if a player won or a button is already have been clicked
         if (this.played.indexOf(e.target.id) !== -1 || this.won) {
             return;
         }
 
-        this.played.push(e.target.id);
+        this.played.push(e.target.id); //to keep track of the number of plays in the game
+
         e.target.innerHTML = this.p1Next ? 'X' : 'O';
-        this.p1Next = !this.p1Next; // toggle
 
-        //after each movement, check if any player has won
+        this.p1Next = !this.p1Next; // toggle to the next player
 
+        //after each movement, check if the current player has won or not
         this.won = this.checkWins();
 
         if (!this.won) {

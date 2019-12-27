@@ -1,6 +1,17 @@
+body {background-color: coral;}
+
+h2, h3, h1, table, #board, #reset {
+    margin-left: 50px;
+}
+
+.content {
+    max-width: 500px;
+    margin: auto;
+}
 .cell {
-    width: 107px;
-    height: 107px;
+    width: 100px;
+    height: 100px;
+    font-size: large;
 }
 
 #scoreboard table {
@@ -14,9 +25,15 @@ tr, th {
 }
 
 th {
-    width: 77px;
+    width: 80px;
 }
 
 tr {
     height: 30px;
+}
+
+#reset {
+    margin-top: 40px;
+    font-size: large;
+    color: cadetblue;
 }
