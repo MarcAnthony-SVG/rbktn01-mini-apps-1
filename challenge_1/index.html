@@ -7,11 +7,49 @@
         width: 107px;
         height: 107px;
     }
+
+    #scoreboard table {
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    tr, th {
+        border: black 1px solid;
+    }
+
+    th {
+        width: 77px;
+    }
+
+    tr {
+        height: 30px;
+    }
+
 </style>
 <body>
-    <div id="board">
-
+    <div id="scoreboard">
+        <table>
+            <tr>
+                <th></th>
+                <th id="p1">Salim</th>
+                <th id="p2">ahmed</th>
+            </tr>
+            <tr>
+                <th>Wins</th>
+                <th id="p1-score">0</th>
+                <th id="p2-score">0</th>
+            </tr>
+        </table>
+        <div id="turn"></div>
     </div>
+
+    <div id="board"></div>
+    <div>
+        <button id="reset"> Wanna play again? </button>
+    </div>
+
+    <h4 id="wiener"></h4>
+
     <script src="app.js"></script>
 </body>
 </html>
