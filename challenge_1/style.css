@@ -1,0 +1,22 @@
+.cell {
+    width: 107px;
+    height: 107px;
+}
+
+#scoreboard table {
+    border-collapse: collapse;
+    margin-bottom: 30px;
+
+}
+
+tr, th {
+    border: black 1px solid;
+}
+
+th {
+    width: 77px;
+}
+
+tr {
+    height: 30px;
+}

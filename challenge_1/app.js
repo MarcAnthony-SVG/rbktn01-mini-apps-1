@@ -1,14 +1,19 @@
 class Game {
     constructor() {
         this.board = document.getElementById('board');
+        this.reset = document.getElementById('reset');
+        this.reset.addEventListener('click', this.init);
         this.turn = document.getElementById('turn');
         this.winner = document.getElementById('wiener');
 
         this.player1 = document.getElementById('player-1');
         this.player2 = document.getElementById('player-2');
 
-        let player1_score = document.getElementById('p1-score');
-        let player2_score = document.getElementById('p2-score');
+        this.player1_score = document.getElementById('p1-score');
+        this.player2_score = document.getElementById('p2-score');
+
+        this.currentPlayer;
+
 
         this.player1.innerHTML = this.p1 = prompt('PLease Enter Player 1"s name');
         this.player1.innerHTML += ' (X)';
@@ -23,14 +28,20 @@ class Game {
             this.player2.innerHTML = this.p2;
         }
 
-        this.played = [];
-        this.won = false;
+        this.played;
+        this.won;
 
         this.init();
     }
     //initializing the Game. Preparing an n x n with tables and cells and appending them to the main board.
-    init() {
+    init = () => {
         //board init
+
+        this.board.innerHTML = '';
+        this.winner.innerHTML = '';
+        this.played = [];
+        this.won = false;
+        this.turn.innerHTML = '';
 
         // create 3 table rows and 3 tds
         for (let i = 0; i < 3; i++) {
@@ -39,15 +50,14 @@ class Game {
 
             for (var j = 0; j < 3; j++) {
                 var buttonElement = document.createElement('button');
-                buttonElement.classList.add('table');
+                buttonElement.classList.add('cell');
                 buttonElement.id = i + '' + j;
                 buttonElement.addEventListener('click', this.display);
                 row.appendChild(buttonElement)
             }
         }
-    }
+    };
 
-    ////////////////////////////////////////
 
     checkRows = () => {
         for (let row = 0; row < 3; row++) {
@@ -92,6 +102,7 @@ class Game {
         return false;
     };
 
+    // check all diagonals
     checkDiagonals = () => {
         if (this.checkMajorDiagonal()) return true;
         return !!this.checkMinorDiagonal();
@@ -126,29 +137,50 @@ class Game {
 
     };
 
-
-
     checkWins = () => {
         return this.checkRows() || this.checkColumns() || this.checkDiagonals()
     };
 
+    displayPlayerRound = () => {
+        this.currentPlayer = this.p1Next ? this.p1 : this.p2;
+        this.turn.innerHTML = 'Yo Its ' + this.currentPlayer + "'s turn!"
+    };
 
     display = (e) => {
+        console.log(this.played)
+        if (this.played.indexOf(e.target.id) !== -1 || this.won) {
+            return;
+        }
+
         this.played.push(e.target.id);
         e.target.innerHTML = this.p1Next ? 'X' : 'O';
         this.p1Next = !this.p1Next; // toggle
 
         //after each movement, check if any player has won
 
-        this.won = this.checkWins()
-        console.log(this.won)
-    }
+        this.won = this.checkWins();
+
+        if (!this.won) {
+            this.displayPlayerRound();
+        }
+        if (this.won) {
+            this.currentPlayer = this.p1Next ? this.p2 : this.p1;
+
+            if (this.currentPlayer === this.p1) {
+                this.player1_score.innerHTML = Number(this.player1_score.innerHTML) + 1;
+            } else if (this.currentPlayer === this.p2) {
+                this.player2_score.innerHTML = Number(this.player2_score.innerHTML) + 1;
+            }
+            this.p1Next = !this.p1Next;
+            this.winner.innerHTML = this.currentPlayer + ' WON!!!!!!!!!!'
+        }
+        if (!this.won && this.played.length === 9) {
+            this.winner.innerHTML = "Its a TIE lads"
+        }
+    };
 
 }
 
-class Player {
 
-}
-
-var game = new Game(3);
+var game = new Game();
 
