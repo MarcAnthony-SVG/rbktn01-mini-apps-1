@@ -47,7 +47,6 @@ class Game {
         }
     }
 
-
     ////////////////////////////////////////
 
     checkRows = () => {
@@ -93,9 +92,40 @@ class Game {
         return false;
     };
 
-    checkDiagonals = () =>{
+    checkDiagonals = () => {
+        if (this.checkMajorDiagonal()) return true;
+        return !!this.checkMinorDiagonal();
+    };
+
+    checkMajorDiagonal = () => {
+        var xCount = 0; var oCount = 0;
+        for (var index = 0; index < 3; index++) {
+            var value = document.getElementById(index + '' + index);
+            if (value.innerHTML === 'X') {
+                xCount++;
+            } else if (value.innerHTML === 'O') {
+                oCount++;
+            }
+        }
+        return xCount === 3 || oCount === 3;
 
     };
+    checkMinorDiagonal = () => {
+        var xCount = 0; var oCount = 0;
+        var columnIndex = 2;
+        for (var index = 0; index < 3; index++) {
+            var value = document.getElementById(index + '' + columnIndex);
+            if (value.innerHTML === 'X') {
+                xCount++;
+            } else if (value.innerHTML === 'O') {
+                oCount++;
+            }
+            columnIndex--;
+        }
+        return xCount === 3 || oCount === 3;
+
+    };
+
 
 
     checkWins = () => {
@@ -109,8 +139,9 @@ class Game {
         this.p1Next = !this.p1Next; // toggle
 
         //after each movement, check if any player has won
-        console.log(this.checkColumns());
+
         this.won = this.checkWins()
+        console.log(this.won)
     }
 
 }
