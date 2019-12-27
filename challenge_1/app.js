@@ -1,28 +1,43 @@
 class Game {
-
-    constructor(n) {
+    constructor() {
         this.board = document.getElementById('board');
-        this.init(n);
+        this.played = [];
+        this.won = false;
+        this.init();
     }
     //initializing the Game. Preparing an n x n with tables and cells and appending them to the main board.
-    init(n) {
+    init() {
         var tdIdCounter = 0;
         var rows = [];
         // create 3 table rows and 3 tds
-        for (let i = 0; i < n; i++) {
-            var row = document.createElement('tr');
-            row.id = 'row-'+ i; // row ids will be: row-1, row-2 ...etc
-            rows.push(row);
-            for (let j = 0; j < n; j++) {
-                var tableData = document.createElement('td');
-                tableData.id = 'cell-' + tdIdCounter;  // cell ids will be: cell-1, cell-2 ...etc
-                tdIdCounter++;
-                rows[i].appendChild(tableData);
+        for (let i = 0; i < 3; i++) {
+            var divElement = document.createElement('div');
+            var row = this.board.appendChild(divElement);
+
+            for (var j = 0; j < 3; j++) {
+                var buttonElement = document.createElement('button');
+                buttonElement.classList.add('table');
+                buttonElement.id = i + '' + j;
+                buttonElement.addEventListener('click', this.display);
+                row.appendChild(buttonElement)
             }
         }
-        rows.forEach((node) => {
-            this.board.appendChild(node);
-        });
+    }
+
+    checkRows() {
+
+    }
+
+    checkColumns() {
+
+    }
+
+    checkDiagonals() {
+
+    }
+
+    display() {
+
     }
 }
 
@@ -31,5 +46,4 @@ class Player {
 }
 
 var game = new Game(3);
-console.log(game);
 
