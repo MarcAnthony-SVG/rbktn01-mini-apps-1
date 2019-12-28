@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
         })
         .catch(() => console.log('Error while writing the file'))
         .then((n = 0) => {
-            res.header('Content-Disposition', `attachment; filename=csv_report${n}.csv`);
+            res.header('Content-Disposition', `attachment; filename=report${n}.csv`);
             res.sendfile(path.join(__dirname, `/utilties/${n}.csv`));
             return Promise.resolve(n);
         })
