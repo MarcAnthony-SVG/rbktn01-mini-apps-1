@@ -19,6 +19,7 @@ app.use(express.static('client'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/', (req, res) => {
+    console.log(req.body);
     var csv = jsonToCSV(JSON.parse(req.body.cInput));
     readFileAsync('./utilties/ids.txt')
         .then(counter => Promise.resolve(Number(counter)))
@@ -32,12 +33,16 @@ app.post('/', (req, res) => {
         .catch(() => console.log('Error while writing the file'))
         .then((n = 0) => {
             res.header('Content-Disposition', `attachment; filename=report${n}.csv`);
-            res.sendfile(path.join(__dirname, `/utilties/${n}.csv`));
+            res.sendFile(path.join(__dirname, `/utilties/${n}.csv`));
             return Promise.resolve(n);
         })
         .then(id => {
             writeFileAsync(`./utilties/ids.txt`, id + 1);
-            return Promise.resolve(id)
+            return Promise.resolve(id + 1)
+        })
+        .then(lastId => {
+            writeFileAsync(`./utilties/last.txt`, lastId );
+            return Promise.resolve(lastId)
         })
         .catch(() => console.log('error occurred'))
 
