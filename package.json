@@ -1,0 +1,35 @@
+{
+  "name": "rbktn01-mini-apps-1",
+  "version": "1.0.0",
+  "description": "Exercise: Mini App Sprint\r In this 4-day sprint, you will build four \"mini apps\" completely from scratch. Building small apps from scratch is something that you will be asked to do in every technical interview during your job search. Mastering these concepts is essential to landing a job.",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/plugin-transform-arrow-functions": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "express": "^4.17.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "semantic-ui-react": "^0.88.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Salim-Alsaeh/rbktn01-mini-apps-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Salim-Alsaeh/rbktn01-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/Salim-Alsaeh/rbktn01-mini-apps-1#readme"
+}

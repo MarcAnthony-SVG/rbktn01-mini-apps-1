@@ -6,22 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "rebuild": "babel --watch client --out-dir public/compiled/ --presets=env,react --source-maps inline"
+    "rebuild": "babel --watch  client --out-dir public --presets=@babel/preset-react,@babel/preset-env"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
+    "@babel/cli": "^7.7.7",
+    "@babel/plugin-transform-arrow-functions": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-react-app": "^3.1.2",
+    "babel-preset-react-app": "^9.1.0",
     "express": "^4.17.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
     "nodemon": "^2.0.2"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   }
 }
