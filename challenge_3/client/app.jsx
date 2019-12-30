@@ -289,7 +289,17 @@ class PaymentDetails extends React.Component {
 
 class Confirmation extends React.Component {
     saveAndContinue = (e) => {
+        //const {name, email, password, line1Address, line2Address, city, state, phoneNumber, creditCardNumber, expirationDate, CVV, zip} = this.props.values;
         e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "http://127.0.0.1:6966/",
+            data: this.props.values,
+            dataType: "text",
+            success: function(resultData) {
+                console.log(resultData)
+            }
+        });
         this.props.nextStep();
         console.log(this.props)
     };
