@@ -1,4 +1,15 @@
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>TESTTTT</h1>
+            </div>
+        );
+    }
+}
+
+
 ReactDOM.render(
-    <h1>Hello, world!</h1>,
+    <App/>,
     document.getElementById('root')
 );
